@@ -4,6 +4,7 @@ const sequelizeModule = require('./sequelize');
 
 module.exports = async (app) => {
     await configModule();
-    await sequelizeModule();
+    global.db = await sequelizeModule();
     await expressModule(app);
+
 };

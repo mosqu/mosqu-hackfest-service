@@ -1,11 +1,14 @@
 const dotenv = require('dotenv');
 
 module.exports = () => {
-    process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+    return new Promise((resolve) => {
+    	process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
-    const result = dotenv.config({ path: './config/.env' });
-    if (result.error) {
-        throw new Error('Could not find .env file');
-    }
-    console.log('Environment successfully loaded');
+	    const config = dotenv.config({ path: './config/.env' });
+	    if (config.error) {
+	        throw new Error('Could not find .env file');
+	    }
+	    console.log('Environment successfully loaded');
+	    resolve();
+    });
 };
