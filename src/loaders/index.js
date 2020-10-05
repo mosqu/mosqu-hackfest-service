@@ -6,5 +6,4 @@ module.exports = async (app) => {
     await configModule();
     global.db = await sequelizeModule();
     await expressModule(app);
-
 };

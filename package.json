@@ -4,7 +4,6 @@
   "description": "MosQu Service",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js"
   },
   "repository": {
@@ -12,10 +11,13 @@
     "url": "git+https://github.com/mosqu/mosqu-service.git"
   },
   "dependencies": {
+    "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0",
     "pg": "^8.3.3",
     "pg-hstore": "^2.3.3",
     "pg-native": "^3.0.0",
@@ -24,7 +26,12 @@
   "keywords": [
     "mosqu"
   ],
-  "author": "Team MosQu",
+  "author": {
+    "name": "Miftahul Arifin",
+    "email": "miftahul97@gmail.com",
+    "url": "https://github.com/arifintahu"
+  },
+  "contributors": [],
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/mosqu/mosqu-service/issues"

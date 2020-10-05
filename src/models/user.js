@@ -14,27 +14,27 @@ module.exports = (db) => {
         },
         password : {
             type      : Sequelize.STRING,
-            allowNull : false
+            allowNull : true
         },
         email         : {
             type      : Sequelize.STRING,
-            allowNull : false
+            allowNull : true
         },
         full_name     : {
             type        : Sequelize.INTEGER,
-            allowNull   : false,
+            allowNull   : true,
         },
         statusid  : {
             type      : Sequelize.INTEGER,
-            allowNull : false
+            allowNull : true
         },
         createdate    : {
             type      : Sequelize.DATE,
-            allowNull : false
+            allowNull : true
         },
         createby      : {
             type      : Sequelize.STRING,
-            allowNull : false
+            allowNull : true
         }
     }, {
         freezeTableName : true,

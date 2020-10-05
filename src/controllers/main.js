@@ -1,7 +1,9 @@
-const { main } = require('../services');
+const service = require('../services');
 
 module.exports = {
-	hello: (req, res) => {
-		res.send(main.hello());
+	hello: async (req, res) => {
+		const result = await service.main.hello();
+
+		res.json(result);
 	}
 }
