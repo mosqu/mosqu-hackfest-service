@@ -1,6 +1,6 @@
-const bodyParser = require('body-parser');
-const cors = require('cors');
-const routers = require('../routers');
+const bodyParser 	= require('body-parser');
+const cors			= require('cors');
+const routers 		= require('../routers');
 
 module.exports = (app) => {
     return new Promise((resolve) => {

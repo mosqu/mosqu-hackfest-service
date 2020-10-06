@@ -1,8 +1,8 @@
 const { Sequelize } = require('sequelize');
-const model = require('../models');
+const model 		= require('../models');
 
 module.exports = () => {
-	return new Promise((resolve) => {
+	return new Promise(async (resolve) => {
 		const db = new Sequelize(
 			process.env.DB_NAME, 
 			process.env.DB_USERNAME, 
@@ -15,12 +15,24 @@ module.exports = () => {
 				ssl: true
 			}
 		);
-		const user = model.user(db);
+		const masjid 			= model.masjid(db);
+		const masjid_image 		= model.masjid_image(db);
+		const masjid_map 		= model.masjid_map(db);
+		const masjid_program	= model.masjid_program(db);
+		const role 				= model.role(db);
+		const role_map 			= model.role_map(db);
+		const user 				= model.user(db);
 
 		db.authenticate()
 			.then(() => {
 				console.log('Connection has been established successfully.');
 				resolve({
+					masjid,
+					masjid_image,
+					masjid_map,
+					masjid_program,
+					role,
+					role_map,
 					user
 				});
 			}).catch((error) => {

@@ -2,27 +2,19 @@ const Sequelize = require(`sequelize`);
 
 module.exports = (db) => {
 
-    return db.define(`user`, {
-        user_uid      : {
+    return db.define(`role`, {
+        role_uid      : {
             type       : Sequelize.UUIDV4,
             primaryKey : true,
             defaultValue: Sequelize.UUIDv4
         },
-        username        : {
+        description        : {
             type      : Sequelize.STRING,
             allowNull : false,
         },
-        password : {
+        name : {
             type      : Sequelize.STRING,
             allowNull : true
-        },
-        email         : {
-            type      : Sequelize.STRING,
-            allowNull : true
-        },
-        full_name     : {
-            type        : Sequelize.STRING,
-            allowNull   : true,
         },
         statusid  : {
             type      : Sequelize.INTEGER,

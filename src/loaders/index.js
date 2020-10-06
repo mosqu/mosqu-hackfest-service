@@ -1,6 +1,6 @@
-const expressModule = require('./express');
-const configModule = require('./config');
-const sequelizeModule = require('./sequelize');
+const expressModule 	= require('./express');
+const configModule 		= require('./config');
+const sequelizeModule 	= require('./sequelize');
 
 module.exports = async (app) => {
     await configModule();

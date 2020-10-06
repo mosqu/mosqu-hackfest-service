@@ -2,27 +2,23 @@ const Sequelize = require(`sequelize`);
 
 module.exports = (db) => {
 
-    return db.define(`user`, {
-        user_uid      : {
+    return db.define(`masjid_image`, {
+        image_uid      : {
             type       : Sequelize.UUIDV4,
             primaryKey : true,
             defaultValue: Sequelize.UUIDv4
         },
-        username        : {
-            type      : Sequelize.STRING,
-            allowNull : false,
-        },
-        password : {
-            type      : Sequelize.STRING,
+        masjid_uid  : {
+            type      : Sequelize.UUID,
             allowNull : true
         },
-        email         : {
-            type      : Sequelize.STRING,
+        masjid_program_uid  : {
+            type      : Sequelize.UUID,
             allowNull : true
         },
-        full_name     : {
-            type        : Sequelize.STRING,
-            allowNull   : true,
+        url         : {
+            type      : Sequelize.STRING,
+            allowNull : true
         },
         statusid  : {
             type      : Sequelize.INTEGER,
