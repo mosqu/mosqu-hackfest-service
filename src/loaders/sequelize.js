@@ -25,7 +25,7 @@ module.exports = () => {
 
 		db.authenticate()
 			.then(() => {
-				console.log('Connection has been established successfully.');
+				console.log('Database connection has been established successfully.');
 				resolve({
 					masjid,
 					masjid_image,

@@ -9,7 +9,14 @@ module.exports = {
 		res.json(result);
 	},
 	login: async (req, res) => {
-		const result = await service.user.register({
+		const result = await service.user.login({
+			...req.body
+		});
+
+		res.json(result);
+	},
+	allUser: async (req, res) => {
+		const result = await service.user.allUser({
 			...req.body
 		});
 
