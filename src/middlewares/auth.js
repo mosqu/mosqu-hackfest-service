@@ -35,10 +35,11 @@ module.exports = {
 		});
 	},
 	verifyToken: (token) => {
-		return new Promise(( resolve, reject) => {
+		return new Promise(( resolve) => {
 			jwt.verify(token, process.env.JWT_KEY, (err, decoded) => {
 				if (err) {
-					reject(err);
+					console.log(err);
+					resolve(false);
 				}
 				resolve(decoded);
 			})
