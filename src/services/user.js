@@ -4,6 +4,7 @@ const { auth } = require('../middlewares');
 
 module.exports = {
 	register: async (data) => {
+		console.log(data);
 		const hashedPassword = await bcrypt.hashSync(data.password, 5); 
 		const isExist = await module.exports.iskUsernameExist(data.username);
 

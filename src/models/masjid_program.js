@@ -49,7 +49,7 @@ module.exports = (db) => {
             allowNull : true
         },
         additional_info : {
-            type      : Sequelize.TEXT,
+            type      : Sequelize.JSONB,
             allowNull : true
         },
         type : {
