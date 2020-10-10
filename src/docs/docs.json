@@ -9,7 +9,11 @@
   "tags": [
     {
       "name": "user",
-      "description": "Operations about user"
+      "description": "Operations for user"
+    },
+    {
+      "name": "masjid",
+      "description": "Operations for masjid"
     }
   ],
   "schemes": [
@@ -97,6 +101,102 @@
           }
         }
       }
+    },
+    "/masjid": {
+      "post": {
+        "tags": [
+          "masjid"
+        ],
+        "summary": "New masjid",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Register masjid object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Masjid"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "description": "Token from user login",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Token"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/masjid/list": {
+      "get": {
+        "tags": [
+          "masjid"
+        ],
+        "summary": "Get list masjid",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "authorization",
+            "description": "Token from user login",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Token"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/masjid/detail/{masjid_uid}": {
+      "get": {
+        "tags": [
+          "masjid"
+        ],
+        "summary": "Get detail masjid",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "authorization",
+            "description": "Token from user login",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Token"
+            }
+          },
+          {
+            "in": "path",
+            "name": "masjid_uid",
+            "required": true,
+            "type" : "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -126,6 +226,43 @@
         "full_name": {
           "type": "string",
           "example": "Test123"
+        }
+      }
+    },
+    "Masjid": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "Masjid Cipta Kerja"
+        },
+        "address": {
+          "type": "string",
+          "example": "Jalan Harapan Bangsa No 1"
+        },
+        "city": {
+          "type": "string",
+          "example": "Bandung"
+        },
+        "province": {
+          "type": "string",
+          "example": "Jawa Barat"
+        },
+        "latitude": {
+          "type": "float",
+          "example": "-6.92112"
+        },
+        "longitude": {
+          "type": "float",
+          "example": "107.61986"
+        },
+        "year_built": {
+          "type": "string",
+          "example": "1998"
+        },
+        "additional_info": {
+          "type": "object",
+          "example": ""
         }
       }
     },

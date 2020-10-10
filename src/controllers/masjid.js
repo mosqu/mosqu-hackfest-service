@@ -4,7 +4,8 @@ module.exports = {
 	new: async (req, res) => {
 		const result = await service.masjid.new({
 			...req.body,
-			username: req.userdata.username
+			username: req.userdata.username,
+			user_uid: req.userdata.user_uid
 		});
 
 		res.json(result);

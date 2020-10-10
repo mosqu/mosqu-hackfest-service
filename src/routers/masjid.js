@@ -12,7 +12,7 @@ route.get('/list', [ auth.checkHeader ], (req, res) => {
 	controller.masjid.getAll(req, res);
 });
 
-route.get('/list/:masjid_uid', [ auth.checkHeader ], (req, res) => {
+route.get('/detail/:masjid_uid', [ auth.checkHeader ], (req, res) => {
 	controller.masjid.getDetail(req, res);
 });
 

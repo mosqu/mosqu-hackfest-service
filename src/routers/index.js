@@ -5,11 +5,13 @@ swaggerDocument.host 	= process.env.API_HOST ? process.env.API_HOST : swaggerDoc
 
 const main 			= require('./main');
 const user 			= require('./user');
+const masjid		= require('./masjid');
 
 const app = Router();
 
 app.use('/', main);
 app.use('/user', user);
+app.use('/masjid', masjid);
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, {
 	customCss: '.swagger-ui .topbar { display: none }'
 }));

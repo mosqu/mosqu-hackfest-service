@@ -35,20 +35,24 @@ module.exports = {
 	login: (data) => {
 		return new Promise( async resolve => {
 			const user = await db.user.findOne({
+				attributes: ['user_uid', 'username', 'password'],
 				where : {
 					username: data.username
-				}
+				},
+				raw: true
 			}).catch((error) => {
 				resolve({
 					status : false,
 					msg : error
 				});
 			});
-
 			if (user) {
-				const checkPassword = await bcrypt.compareSync(data.password, user.get('password'));
+				const checkPassword = await bcrypt.compareSync(data.password, user.password);
 				if (checkPassword) {
-					const token = await auth.signToken(data).catch(error => {
+					const token = await auth.signToken({
+						username: user.username,
+						user_uid: user.user_uid
+					}).catch(error => {
 						resolve({
 							status : false,
 							msg : error
