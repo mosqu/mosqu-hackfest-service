@@ -197,6 +197,81 @@
           }
         }
       }
+    },
+    "/masjid/update/{masjid_uid}": {
+      "post": {
+        "tags": [
+          "masjid"
+        ],
+        "summary": "Update masjid",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Update masjid object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Masjid"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "description": "Token from user login",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Token"
+            }
+          },
+          {
+            "in": "path",
+            "name": "masjid_uid",
+            "required": true,
+            "type" : "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/masjid/remove/{masjid_uid}": {
+      "post": {
+        "tags": [
+          "masjid"
+        ],
+        "summary": "Remove masjid",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "authorization",
+            "description": "Token from user login",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Token"
+            }
+          },
+          {
+            "in": "path",
+            "name": "masjid_uid",
+            "required": true,
+            "type" : "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
     }
   },
   "definitions": {

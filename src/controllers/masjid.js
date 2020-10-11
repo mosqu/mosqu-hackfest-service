@@ -4,8 +4,7 @@ module.exports = {
 	new: async (req, res) => {
 		const result = await service.masjid.new({
 			...req.body,
-			username: req.userdata.username,
-			user_uid: req.userdata.user_uid
+			...req.userdata
 		});
 
 		res.json(result);
@@ -28,14 +27,17 @@ module.exports = {
 	update: async (req, res) => {
 		const result = await service.masjid.update({
 			...req.body,
-			username: req.userdata.username
+			...req.params,
+			...req.userdata
 		});
 
 		res.json(result);
 	},
 	remove: async (req, res) => {
 		const result = await service.masjid.remove({
-			...req.body
+			...req.body,
+			...req.params,
+			...req.userdata
 		});
 
 		res.json(result);

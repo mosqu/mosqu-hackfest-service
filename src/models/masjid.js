@@ -51,6 +51,10 @@ module.exports = (db) => {
         createby      : {
             type      : Sequelize.STRING,
             allowNull : true
+        },
+        updateby      : {
+            type      : Sequelize.STRING,
+            allowNull : true
         }
     }, {
         freezeTableName : true,
