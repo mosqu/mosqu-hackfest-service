@@ -11,7 +11,8 @@ module.exports = {
 	},
 	getAll: async (req, res) => {
 		const result = await service.masjid.getAll({
-			...req.body
+			...req.body,
+			...req.query
 		});
 
 		res.json(result);

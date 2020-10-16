@@ -149,13 +149,22 @@
         ],
         "parameters": [
           {
-            "in": "header",
-            "name": "authorization",
-            "description": "Token from user login",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Token"
-            }
+            "in": "query",
+            "name": "name",
+            "required": false,
+            "type" : "string"
+          },
+          {
+            "in": "query",
+            "name": "city",
+            "required": false,
+            "type" : "string"
+          },
+          {
+            "in": "query",
+            "name": "province",
+            "required": false,
+            "type" : "string"
           }
         ],
         "responses": {
@@ -175,15 +184,6 @@
           "application/json"
         ],
         "parameters": [
-          {
-            "in": "header",
-            "name": "authorization",
-            "description": "Token from user login",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Token"
-            }
-          },
           {
             "in": "path",
             "name": "masjid_uid",

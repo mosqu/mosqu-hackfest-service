@@ -1,4 +1,5 @@
 const model = require('../models');
+const Op = require('sequelize').Op;
 
 module.exports = {
 	new: (data) => {
@@ -27,13 +28,34 @@ module.exports = {
 		});
 	},
 	getAll: (data) => {
+		let where = {
+			statusid : 1
+		};
+
+		if (data.name) {
+			where.name = {
+				[Op.iLike] : `%${data.name}%`
+			}
+		}
+
+		if (data.city) {
+			where.city = {
+				[Op.iLike] : `%${data.city}%`
+			}
+		}
+
+		if (data.province) {
+			where.province = {
+				[Op.iLike] : `%${data.province}%`
+			}
+		}
+
 		return new Promise(resolve => {
 			db.masjid.findAll({
 				attributes: ['masjid_uid', 'name', 'address', 
 							'city', 'province'],
-				where : {
-					statusid: 1
-				}
+				where : where,
+				limit : 20
 			}).then(result => {
 				resolve({
 					status: true,

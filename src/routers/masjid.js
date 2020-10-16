@@ -8,11 +8,11 @@ route.post('/', [ auth.checkHeader ], (req, res) => {
 	controller.masjid.new(req, res);
 });
 
-route.get('/list', [ auth.checkHeader ], (req, res) => {
+route.get('/list', [], (req, res) => {
 	controller.masjid.getAll(req, res);
 });
 
-route.get('/detail/:masjid_uid', [ auth.checkHeader ], (req, res) => {
+route.get('/detail/:masjid_uid', [], (req, res) => {
 	controller.masjid.getDetail(req, res);
 });
 

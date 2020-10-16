@@ -4,11 +4,11 @@ const { auth } = require('../middlewares');
 
 const route = Router();
 
-route.post('/register', (req, res) => {
+route.post('/register', [], (req, res) => {
 	controller.user.register(req, res);
 });
 
-route.post('/login', (req, res) => {
+route.post('/login', [], (req, res) => {
 	controller.user.login(req, res);
 });
 
