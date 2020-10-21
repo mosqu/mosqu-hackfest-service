@@ -14,6 +14,10 @@
     {
       "name": "masjid",
       "description": "Operations for masjid"
+    },
+    {
+      "name": "program",
+      "description": "Operations for program"
     }
   ],
   "schemes": [
@@ -272,6 +276,96 @@
           }
         }
       }
+    },
+    "/program": {
+      "post": {
+        "tags": [
+          "program"
+        ],
+        "summary": "New program masjid",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Register program masjid object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Program"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "description": "Token from user login",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Token"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/program/list": {
+      "get": {
+        "tags": [
+          "program"
+        ],
+        "summary": "Get list program",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "name",
+            "required": false,
+            "type" : "string"
+          },
+          {
+            "in": "query",
+            "name": "location",
+            "required": false,
+            "type" : "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/program/detail/{masjid_program_uid}": {
+      "get": {
+        "tags": [
+          "program"
+        ],
+        "summary": "Get detail program",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "masjid_program_uid",
+            "required": true,
+            "type" : "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -334,6 +428,59 @@
         "year_built": {
           "type": "string",
           "example": "1998"
+        },
+        "additional_info": {
+          "type": "object",
+          "example": ""
+        }
+      }
+    },
+    "Program": {
+      "type": "object",
+      "properties": {
+        "masjid_uid": {
+          "type": "string",
+          "example": "uuid"
+        },
+        "name": {
+          "type": "string",
+          "example": "Qurban"
+        },
+        "description": {
+          "type": "string",
+          "example": "Qurban Bersama"
+        },
+        "link": {
+          "type": "string",
+          "example": ""
+        },
+        "location": {
+          "type": "string",
+          "example": "Teras"
+        },
+        "start_date": {
+          "type": "string",
+          "example": "2020-08-01"
+        },
+        "end_date": {
+          "type": "string",
+          "example": "2020-08-01"
+        },
+        "start_time": {
+          "type": "string",
+          "example": "10:00"
+        },
+        "end_time": {
+          "type": "string",
+          "example": "15:00"
+        },
+        "day": {
+          "type": "string",
+          "example": "Monday"
+        },
+        "type": {
+          "type": "string",
+          "example": "eventual"
         },
         "additional_info": {
           "type": "object",

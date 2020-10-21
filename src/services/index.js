@@ -1,9 +1,11 @@
 const main = require('./main');
 const user = require('./user');
 const masjid = require('./masjid');
+const masjid_program = require('./masjid_program');
 
 module.exports = {
 	main,
 	user,
-	masjid
+	masjid,
+	masjid_program
 };

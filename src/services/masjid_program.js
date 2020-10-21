@@ -4,6 +4,7 @@ const Op = require('sequelize').Op;
 module.exports = {
 	new: (data) => {
 		return new Promise( async (resolve) => {
+			console.log(data);
 			const isOwner = await module.exports.checkOwner(data);
 			if (isOwner) {
 				db.masjid_program.create({
@@ -69,7 +70,7 @@ module.exports = {
 			db.masjid_program.findOne({
 				where : {
 					statusid: 1,
-					masjid_uid: data.masjid_program_uid
+					masjid_program_uid: data.masjid_program_uid
 				}
 			}).then(result => {
 				resolve({
