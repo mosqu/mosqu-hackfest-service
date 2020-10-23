@@ -20,7 +20,7 @@ route.post('/update/:masjid_program_uid', [ auth.checkHeader ], (req, res) => {
 	controller.masjid_program.update(req, res);
 });
 
-route.post('/remove/:masjid_program_uid', [ auth.checkHeader ], (req, res) => {
+route.post('/remove/:masjid_uid/:masjid_program_uid', [ auth.checkHeader ], (req, res) => {
 	controller.masjid_program.remove(req, res);
 });
 

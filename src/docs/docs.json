@@ -366,6 +366,87 @@
           }
         }
       }
+    },
+    "/program/update/{masjid_program_uid}": {
+      "post": {
+        "tags": [
+          "program"
+        ],
+        "summary": "Update program",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Update masjid object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Program"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "description": "Token from user login",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Token"
+            }
+          },
+          {
+            "in": "path",
+            "name": "masjid_program_uid",
+            "required": true,
+            "type" : "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/program/remove/{masjid_uid}/{masjid_program_uid}": {
+      "post": {
+        "tags": [
+          "program"
+        ],
+        "summary": "Remove program",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "authorization",
+            "description": "Token from user login",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Token"
+            }
+          },
+          {
+            "in": "path",
+            "name": "masjid_program_uid",
+            "required": true,
+            "type" : "string"
+          },
+          {
+            "in": "path",
+            "name": "masjid_uid",
+            "required": true,
+            "type" : "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -440,7 +521,7 @@
       "properties": {
         "masjid_uid": {
           "type": "string",
-          "example": "uuid"
+          "example": "2776e231-c90a-410a-b522-2a03f2dbd184"
         },
         "name": {
           "type": "string",
