@@ -4,7 +4,7 @@ const path = require('path');
 module.exports = () => {
     return new Promise(async (resolve, reject) => {
         const storage = new Storage();
-        const bucket = storage.bucket('mosqu-2c291.appspot.com');
+        const bucket = storage.bucket(process.env.STORAGE_BUCKET);
 
         bucket.getMetadata()
             .then(() => {
