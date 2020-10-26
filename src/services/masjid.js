@@ -185,5 +185,8 @@ module.exports = {
 				resolve(false);
 			});
 		});
+	},
+	uploadImage: (data) => {
+		
 	}
 }

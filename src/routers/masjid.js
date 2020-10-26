@@ -24,4 +24,8 @@ route.post('/remove/:masjid_uid', [ auth.checkHeader ], (req, res) => {
 	controller.masjid.remove(req, res);
 });
 
+route.post('/image/:masjid_uid', [ auth.checkHeader ], (req, res) => {
+	controller.masjid.uploadImage(req, res);
+});
+
 module.exports = route;

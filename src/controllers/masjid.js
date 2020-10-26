@@ -43,4 +43,13 @@ module.exports = {
 
 		res.json(result);
 	},
+	uploadImage: async (req, res) => {
+		const result = await service.masjid.uploadImage({
+			...req.body,
+			...req.params,
+			...req.userdata
+		});
+
+		res.json(result);
+	}
 }
