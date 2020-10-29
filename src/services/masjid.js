@@ -186,7 +186,17 @@ module.exports = {
 			});
 		});
 	},
-	uploadImage: (data) => {
-		
+	uploadImage: async (data) => {
+		const res = await bucket.upload((data.file.directory), {
+            gzip: true,
+            metadata: {
+                cacheControl: 'public, max-age=31536000',
+            }
+        });
+
+        await bucket.file(res[0].metadata.name).makePublic();
+        console.log('File uploaded ', res[0].metadata);
+
+		return res[0].metadata;
 	}
 }

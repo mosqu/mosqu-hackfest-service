@@ -1,4 +1,5 @@
 const service = require('../services');
+const path 	 = require('path');
 
 module.exports = {
 	new: async (req, res) => {
@@ -44,12 +45,27 @@ module.exports = {
 		res.json(result);
 	},
 	uploadImage: async (req, res) => {
-		const result = await service.masjid.uploadImage({
-			...req.body,
-			...req.params,
-			...req.userdata
-		});
+		console.log(req.files);
+		if (!req.files || Object.keys(req.files).length === 0) {
+			res.send({
+				status : false,
+				msg : 'No files were uploaded.'
+			});
+		} else {
+			const ext = req.files.file.name.split(".")[1];
+			const dir = path.join(__dirname, `../../protected/${req.files.file.md5}.${ext}`);
 
-		res.json(result);
+			req.files.file.mv(dir);
+			const result = await service.masjid.uploadImage({
+				...req.body,
+				...req.params,
+				...req.userdata,
+				file : {
+					directory: dir
+				}
+			});
+
+			res.json(result);
+		}
 	}
 }

@@ -8,23 +8,12 @@ module.exports = () => {
 
         bucket.getMetadata()
             .then(() => {
-                console.log('Bucket loaded');
+                console.log('Bucket successfully loaded');
                 resolve(bucket);
             })
             .catch((error) => {
                 console.log(error);
                 reject(error);
             });
-        // const res = await bucket.upload(path.join(__dirname, '../../Untitled.jpg'), {
-        //     gzip: true,
-        //     metadata: {
-        //         cacheControl: 'public, max-age=31536000',
-        //     }
-        // });
-
-        // await bucket.file('Untitled.jpg').makePublic();
-        // console.log('Bucket loaded ', res[0].metadata.mediaLink);
-        // res[0].metadata.name
-        // resolve(bucket);
     });
 }

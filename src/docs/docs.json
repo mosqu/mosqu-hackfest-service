@@ -277,6 +277,49 @@
         }
       }
     },
+    "/masjid/image/{masjid_uid}": {
+      "post": {
+        "tags": [
+          "masjid"
+        ],
+        "summary": "Upload masjid image",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "file",
+            "type": "file",
+            "description": "File upload",
+            "required": true
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "description": "Token from user login",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Token"
+            }
+          },
+          {
+            "in": "path",
+            "name": "masjid_uid",
+            "required": true,
+            "type" : "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
     "/program": {
       "post": {
         "tags": [
