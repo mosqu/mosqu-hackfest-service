@@ -23,6 +23,11 @@ module.exports = () => {
 		const role_map 			= model.role_map(db);
 		const user 				= model.user(db);
 
+		masjid.belongsTo(masjid_image, {
+			targetKey 	: 'masjid_uid',
+			foreignKey 	: 'masjid_uid'
+		});
+
 		db.authenticate()
 			.then(() => {
 				console.log('Database connection has been established successfully.');

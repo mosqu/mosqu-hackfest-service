@@ -55,6 +55,12 @@ module.exports = {
                 attributes: ['masjid_uid', 'name', 'address', 
                             'city', 'province'],
                 where : where,
+                include: [
+                    {
+                        model       : db.masjid_image,
+                        required    : false
+                    }
+                ],
                 limit : 20
             }).then(result => {
                 resolve({
@@ -62,6 +68,7 @@ module.exports = {
                     data: result
                 });
             }).catch(error => {
+                console.log(error);
                 resolve({
                     status : false,
                     msg : error
