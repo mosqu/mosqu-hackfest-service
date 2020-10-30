@@ -1,5 +1,5 @@
-const model = require('../models');
-const Op = require('sequelize').Op;
+const model 	= require('../models');
+const Op 		= require('sequelize').Op;
 
 module.exports = {
 	new: (data) => {
@@ -48,9 +48,23 @@ module.exports = {
 
 		return new Promise(resolve => {
 			db.masjid_program.findAll({
-				attributes: ['masjid_program_uid', 'name', 'description', 
-							'link', 'location'],
+				attributes: ['masjid_program_uid', 'name', 
+							'description', 'link', 'location'],
 				where : where,
+				include: [
+                    {
+                        model       : db.masjid_image,
+                        as 			: 'images',
+                        attributes  : ['url'],
+                        required    : false
+                    },
+                    {
+                        model       : db.masjid,
+                        attributes 	: ['masjid_uid', 'name', 'address', 
+                        				'city', 'province'],
+                        required    : false
+                    }
+                ],
 				limit : 20
 			}).then(result => {
 				resolve({
@@ -58,6 +72,7 @@ module.exports = {
 					data: result
 				});
 			}).catch(error => {
+				console.log(error);
 				resolve({
 					status : false,
 					msg : error
@@ -71,7 +86,21 @@ module.exports = {
 				where : {
 					statusid: 1,
 					masjid_program_uid: data.masjid_program_uid
-				}
+				},
+				include: [
+                    {
+                        model       : db.masjid_image,
+                        as 			: 'images',
+                        attributes  : ['url'],
+                        required    : false
+                    },
+                    {
+                        model       : db.masjid,
+                        attributes 	: ['masjid_uid', 'name', 'address', 
+                        				'city', 'province'],
+                        required    : false
+                    }
+                ]
 			}).then(result => {
 				resolve({
 					status: true,

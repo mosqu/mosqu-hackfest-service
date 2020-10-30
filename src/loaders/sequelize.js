@@ -23,7 +23,19 @@ module.exports = () => {
 		const role_map 			= model.role_map(db);
 		const user 				= model.user(db);
 
-		masjid.belongsTo(masjid_image, {
+		masjid.hasMany(masjid_image, {
+			as 			: 'images',
+			targetKey 	: 'masjid_uid',
+			foreignKey 	: 'masjid_uid'
+		});
+
+		masjid_program.hasMany(masjid_image, {
+			as 			: 'images',
+			targetKey 	: 'masjid_program_uid',
+			foreignKey 	: 'masjid_program_uid'
+		});
+
+		masjid_program.belongsTo(masjid, {
 			targetKey 	: 'masjid_uid',
 			foreignKey 	: 'masjid_uid'
 		});

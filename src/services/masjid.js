@@ -58,6 +58,8 @@ module.exports = {
                 include: [
                     {
                         model       : db.masjid_image,
+                        as          : 'images',
+                        attributes  : ['url'],
                         required    : false
                     }
                 ],
@@ -82,7 +84,15 @@ module.exports = {
                 where : {
                     statusid: 1,
                     masjid_uid: data.masjid_uid
-                }
+                },
+                include: [
+                    {
+                        model       : db.masjid_image,
+                        as          : 'images',
+                        attributes  : ['url'],
+                        required    : false
+                    }
+                ]
             }).then(result => {
                 resolve({
                     status: true,
