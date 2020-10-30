@@ -24,7 +24,8 @@
     "pg-hstore": "^2.3.3",
     "pg-native": "^3.0.0",
     "sequelize": "^6.3.5",
-    "swagger-ui-express": "^4.1.4"
+    "swagger-ui-express": "^4.1.4",
+    "uuid": "^8.3.1"
   },
   "keywords": [
     "mosqu"

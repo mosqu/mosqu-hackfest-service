@@ -1,5 +1,6 @@
-const service = require('../services');
-const path 	 = require('path');
+const service 			= require('../services');
+const path 	 			= require('path');
+const { v4: uuidv4 }    = require('uuid');
 
 module.exports = {
 	new: async (req, res) => {
@@ -45,7 +46,6 @@ module.exports = {
 		res.json(result);
 	},
 	uploadImage: async (req, res) => {
-		console.log(req.files);
 		if (!req.files || Object.keys(req.files).length === 0) {
 			res.send({
 				status : false,
@@ -53,7 +53,7 @@ module.exports = {
 			});
 		} else {
 			const ext = req.files.file.name.split(".")[1];
-			const dir = path.join(__dirname, `../../protected/${req.files.file.md5}.${ext}`);
+			const dir = path.join(__dirname, `../../protected/${uuidv4()}.${ext}`);
 
 			req.files.file.mv(dir);
 			const result = await service.masjid.uploadImage({

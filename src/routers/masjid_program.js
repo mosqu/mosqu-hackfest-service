@@ -24,4 +24,8 @@ route.post('/remove/:masjid_uid/:masjid_program_uid', [ auth.checkHeader ], (req
 	controller.masjid_program.remove(req, res);
 });
 
+route.post('/image/:masjid_uid/:masjid_program_uid', [ auth.checkHeader ], (req, res) => {
+	controller.masjid_program.uploadImage(req, res);
+});
+
 module.exports = route;

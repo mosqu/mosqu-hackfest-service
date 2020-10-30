@@ -1,3 +1,5 @@
 package-lock.json
 node_modules
-protected/*
+protected/*.png
+protected/*.jpg
+protected/*.jpeg

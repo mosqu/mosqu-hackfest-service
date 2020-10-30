@@ -168,4 +168,67 @@ module.exports = {
 			})
 		});
 	},
+	uploadImage: async (data) => {
+        return new Promise(async (resolve) => {
+            const isOwner = await module.exports.checkOwner(data);
+            
+            if (isOwner) {
+                const res = await bucket.upload((data.file.directory), {
+                    gzip: true,
+                    metadata: {
+                        cacheControl: 'public, max-age=31536000',
+                    }
+                });
+                
+                const meta = res[0] ? res[0].metadata : null;
+
+                if (meta) {
+                    await bucket.file(meta.name).makePublic();
+                    const url           = meta.mediaLink.split('download')[0]+meta.bucket+'/'+meta.name;
+                    const insertImage   = await module.exports.insertMasjidImage({
+                        ...data,
+                        url : url
+                    });
+                    if (insertImage) {
+                        resolve({
+                            status: true,
+                            data: {
+                                url : url
+                            }
+                        });
+                    } else {
+                        resolve({
+                            status: false,
+                            data: 'Failed to insert in database'
+                        });
+                    }
+                } else {
+                    resolve({
+                        status : false,
+                        msg : 'Failed to upload'
+                    });
+                }
+                
+            } else {
+                resolve({
+                    status : false,
+                    msg : 'Unauthorized user'
+                });
+            }
+        });
+        
+    },
+    insertMasjidImage: (data) => {
+        return new Promise(resolve => {
+            db.masjid_image.create({
+                ...data,
+                createby: data.username
+            }).then(() => {
+                resolve(true);
+            }).catch((error) => {
+                console.log(error);
+                resolve(false);
+            });
+        });
+    }
 }
