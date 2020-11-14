@@ -15,6 +15,8 @@ module.exports = () => {
 				ssl: true
 			}
 		);
+		const jamaah_kk 		= model.jamaah_kk(db);
+		const jamaah_kk_member 	= model.jamaah_kk_member(db);
 		const masjid 			= model.masjid(db);
 		const masjid_image 		= model.masjid_image(db);
 		const masjid_map 		= model.masjid_map(db);
@@ -40,10 +42,17 @@ module.exports = () => {
 			foreignKey 	: 'masjid_uid'
 		});
 
+		jamaah_kk.hasMany(jamaah_kk_member, {
+			targetKey 	: 'kk_uid',
+			foreignKey 	: 'kk_uid'
+		});
+
 		db.authenticate()
 			.then(() => {
 				console.log('Database connection has been established successfully.');
 				resolve({
+					jamaah_kk,
+					jamaah_kk_member,
 					masjid,
 					masjid_image,
 					masjid_map,

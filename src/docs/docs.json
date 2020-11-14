@@ -18,6 +18,10 @@
     {
       "name": "program",
       "description": "Operations for program"
+    },
+    {
+      "name": "jamaah",
+      "description": "Operations for jamaah"
     }
   ],
   "schemes": [
@@ -539,6 +543,276 @@
           }
         }
       }
+    },
+    "/jamaah": {
+      "post": {
+        "tags": [
+          "jamaah"
+        ],
+        "summary": "New jamaah masjid",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Register program masjid object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Jamaah"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "description": "Token from user login",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Token"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/jamaah/list": {
+      "get": {
+        "tags": [
+          "jamaah"
+        ],
+        "summary": "Get list jamaah",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "authorization",
+            "description": "Token from user login",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Token"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/jamaah/detail/{kk_uid}": {
+      "get": {
+        "tags": [
+          "jamaah"
+        ],
+        "summary": "Get detail jamaah",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "kk_uid",
+            "required": true,
+            "type" : "string"
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "description": "Token from user login",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Token"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/jamaah/update/{kk_uid}": {
+      "post": {
+        "tags": [
+          "jamaah"
+        ],
+        "summary": "Update jamaah",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Update jamaah object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Jamaah"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "description": "Token from user login",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Token"
+            }
+          },
+          {
+            "in": "path",
+            "name": "kk_uid",
+            "required": true,
+            "type" : "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/jamaah/update/{kk_uid}/{member_uid}": {
+      "post": {
+        "tags": [
+          "jamaah"
+        ],
+        "summary": "Update jamaah member",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Update masjid object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/JamaahMember"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "description": "Token from user login",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Token"
+            }
+          },
+          {
+            "in": "path",
+            "name": "kk_uid",
+            "required": true,
+            "type" : "string"
+          },
+          {
+            "in": "path",
+            "name": "member_uid",
+            "required": true,
+            "type" : "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/jamaah/remove/{kk_uid}": {
+      "post": {
+        "tags": [
+          "jamaah"
+        ],
+        "summary": "Remove jamaah",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "authorization",
+            "description": "Token from user login",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Token"
+            }
+          },
+          {
+            "in": "path",
+            "name": "kk_uid",
+            "required": true,
+            "type" : "string"
+          },
+          {
+            "in": "query",
+            "name": "masjid_uid",
+            "required": true,
+            "type" : "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/jamaah/remove/{kk_uid}/{member_uid}": {
+      "post": {
+        "tags": [
+          "jamaah"
+        ],
+        "summary": "Remove jamaah member",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "authorization",
+            "description": "Token from user login",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Token"
+            }
+          },
+          {
+            "in": "path",
+            "name": "kk_uid",
+            "required": true,
+            "type" : "string"
+          },
+          {
+            "in": "path",
+            "name": "member_uid",
+            "required": true,
+            "type" : "string"
+          },
+          {
+            "in": "query",
+            "name": "masjid_uid",
+            "required": true,
+            "type" : "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -654,6 +928,102 @@
         "type": {
           "type": "string",
           "example": "eventual"
+        },
+        "additional_info": {
+          "type": "object",
+          "example": ""
+        }
+      }
+    },
+    "Jamaah": {
+      "type": "object",
+      "properties": {
+        "masjid_uid": {
+          "type": "string",
+          "example": "2776e231-c90a-410a-b522-2a03f2dbd184"
+        },
+        "name": {
+          "type": "string",
+          "example": "Galih Mulyanto"
+        },
+        "age": {
+          "type": "string",
+          "example": "40"
+        },
+        "birthdate": {
+          "type": "string",
+          "example": "1980-08-08"
+        },
+        "occupation": {
+          "type": "string",
+          "example": "designer"
+        },
+        "salary": {
+          "type": "string",
+          "example": "10000000"
+        },
+        "address": {
+          "type": "string",
+          "example": "Jalan Pasar Ibu, Surabaya"
+        },
+        "latitude": {
+          "type": "float",
+          "example": "-6.92112"
+        },
+        "longitude": {
+          "type": "float",
+          "example": "107.61986"
+        },
+        "additional_info": {
+          "type": "object",
+          "example": ""
+        },
+        "members": {
+          "type": "array",
+          "example": [
+            {
+              "name": "Siti Nurbaya",
+              "age": "35",
+              "birthdate": "1985-07-08",
+              "occupation": "ibu rumah tangga",
+              "salary": "0",
+              "family_status": "istri",
+              "additional_info": ""
+            }
+          ]
+        }
+      }
+    },
+    "JamaahMember": {
+      "type": "object",
+      "properties": {
+        "masjid_uid": {
+          "type": "string",
+          "example": "2776e231-c90a-410a-b522-2a03f2dbd184"
+        },
+        "name": {
+          "type": "string",
+          "example": "Siti Nurbaya"
+        },
+        "age": {
+          "type": "string",
+          "example": "35"
+        },
+        "birthdate": {
+          "type": "string",
+          "example": "1985-07-08"
+        },
+        "occupation": {
+          "type": "string",
+          "example": "ibu rumah tangga"
+        },
+        "salary": {
+          "type": "string",
+          "example": "0"
+        },
+        "family_status": {
+          "type": "string",
+          "example": "istri yg baik"
         },
         "additional_info": {
           "type": "object",
