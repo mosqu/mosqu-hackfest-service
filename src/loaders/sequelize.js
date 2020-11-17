@@ -47,6 +47,18 @@ module.exports = () => {
 			foreignKey 	: 'kk_uid'
 		});
 
+		user.hasMany(role_map, {
+			as 			: 'role',
+			targetKey 	: 'user_uid',
+			foreignKey 	: 'user_uid'
+		});
+
+		user.hasMany(masjid_map, {
+			as 			: 'masjid',
+			targetKey 	: 'user_uid',
+			foreignKey 	: 'user_uid'
+		});
+
 		db.authenticate()
 			.then(() => {
 				console.log('Database connection has been established successfully.');

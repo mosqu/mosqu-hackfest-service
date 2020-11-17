@@ -11,7 +11,8 @@ module.exports = {
 		} else {
 			const encoded = await module.exports.verifyToken(req.headers.authorization);
 			if (encoded) {
-				req.userdata = encoded;
+				const userdata 	= await module.exports.getUserdata(encoded);
+				req.userdata 	= userdata;
 				next();
 			} else {
 				res.status(401).send({
@@ -43,6 +44,47 @@ module.exports = {
 				}
 				resolve(decoded);
 			})
+		});
+	},
+	getUserdata: (data) => {
+		return new Promise((resolve) => {
+			db.user.findOne({
+				attributes: [
+					'user_uid', 'username', 'email', 'full_name'
+				],
+				where: {
+					user_uid: data.user_uid,
+					statusid: 1
+				},
+				include: [
+                    {
+                        model: db.role_map,
+                        as: 'role',
+                        required: false,
+                        attributes: ['role_uid'],
+                        where: {
+                            statusid: 1
+                        }
+                    },
+                    {
+                        model: db.masjid_map,
+                        as: 'masjid',
+                        attributes: ['masjid_uid'],
+                        required: false,
+                        where: {
+                            statusid: 1
+                        }
+                    }
+                ],
+			}).then(result => {
+				if (result) {
+					resolve(result);
+				}
+				resolve({});
+			}).catch((error) => {
+				console.log(error);
+				resolve({});
+			});
 		});
 	}
 }

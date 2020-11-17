@@ -110,6 +110,33 @@
         }
       }
     },
+    "/meta_": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Read meta",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "authorization",
+            "description": "Token from user login",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Token"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
     "/masjid": {
       "post": {
         "tags": [

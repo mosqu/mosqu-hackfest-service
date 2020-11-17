@@ -5,5 +5,9 @@ module.exports = {
 		const result = await service.main.hello();
 
 		res.json(result);
+	},
+
+	meta: (req, res) => {
+		res.json(req.userdata);
 	}
 }
