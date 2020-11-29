@@ -16,6 +16,10 @@ route.get('/detail/:kk_uid', [], (req, res) => {
 	controller.jamaah.getDetail(req, res);
 });
 
+route.get('/chart', [], (req, res) => {
+	controller.jamaah.getChart(req, res);
+});
+
 route.post('/update/:kk_uid', [ auth.checkHeader ], (req, res) => {
 	controller.jamaah.update(req, res);
 });

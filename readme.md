@@ -6,5 +6,3 @@
 
 > Run
 ```node index.js```
-
->

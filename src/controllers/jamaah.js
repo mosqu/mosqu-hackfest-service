@@ -29,6 +29,14 @@ module.exports = {
 		res.json(result);
 	},
 
+	getChart: async (req, res) => {
+		const result = await service.jamaah.getChart({
+			...req.params
+		});
+
+		res.json(result);
+	},
+
 	update: async (req, res) => {
 		const result = await service.jamaah.update({
 			...req.body,

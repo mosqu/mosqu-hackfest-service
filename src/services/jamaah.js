@@ -274,4 +274,125 @@ module.exports = {
         });
     },
 
+    getChart: (data) => {
+        return new Promise( async (resolve) => {
+            const result = await db.jamaah_kk.findAll({
+                where: {
+                    statusid: 1
+                },
+                include: [
+                    {
+                        model: db.jamaah_kk_member,
+                        required: false,
+                        where: {
+                            statusid: 1
+                        }
+                    }
+                ]
+            });
+            const sum_kk        = await module.exports.dataSumKK(result);
+            const total_jamaah  = await module.exports.dataTotalJamaah(result);
+            const mean_kk       = Math.round(total_jamaah*10/sum_kk)/10;
+            const dist_age      = await module.exports.dataDistAge(result);
+            const dist_salary   = await module.exports.dataDistSalary(result);
+
+            resolve({
+                result,
+                sum_kk,
+                total_jamaah,
+                mean_kk,
+                dist_age,
+                dist_salary
+            })
+        });
+    },
+
+    dataSumKK: (data) => {
+        return new Promise( async (resolve) => {
+            resolve(data.length);
+        });
+    },
+
+    dataTotalJamaah: (data) => {
+        return new Promise( async (resolve) => {
+            const sum =  data.reduce((acc, val) => {
+                acc = acc + val.jamaah_kk_members.length + 1;
+                return acc;
+            }, 0);
+            resolve(sum);
+        });
+    },
+
+    dataDistAge: (data) => {
+        return new Promise( async (resolve) => {
+            const array =  data.reduce((acc, val) => {
+                if (val.age) {
+                    acc.push(val.age);
+                }
+
+                if (val.jamaah_kk_members.length) {
+                    val.jamaah_kk_members.map((member) => {
+                        if (member.age) {
+                            acc.push(member.age);
+                        }
+                    });
+                }
+                
+                return acc;
+            }, []);
+
+            const grouped = array.sort().reduce((acc, val) => {
+                const index = acc.labels.indexOf(val);
+                if( index != -1) {
+                    acc.data[index] = acc.data[index] + 1;
+                } else {
+                    acc.data.push(1);
+                    acc.labels.push(val);
+                }
+
+                return acc;
+            }, {
+                data: [],
+                labels: []
+            });
+            resolve(grouped);
+        });
+    },
+
+    dataDistSalary: (data) => {
+        return new Promise( async (resolve) => {
+            const array =  data.reduce((acc, val) => {
+                if (val.salary) {
+                    acc.push(val.salary);
+                }
+
+                if (val.jamaah_kk_members.length) {
+                    val.jamaah_kk_members.map((member) => {
+                        if (member.salary) {
+                            acc.push(member.salary);
+                        }
+                    });
+                }
+                
+                return acc;
+            }, []);
+
+            const grouped = array.sort().reduce((acc, val) => {
+                const index = acc.labels.indexOf(val);
+                if( index != -1) {
+                    acc.data[index] = acc.data[index] + 1;
+                } else {
+                    acc.data.push(1);
+                    acc.labels.push(val);
+                }
+
+                return acc;
+            }, {
+                data: [],
+                labels: []
+            });
+            resolve(grouped);
+        });
+    },
+
 }
