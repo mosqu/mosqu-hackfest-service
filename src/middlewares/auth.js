@@ -73,9 +73,21 @@ module.exports = {
                         required: false,
                         where: {
                             statusid: 1
-                        }
+                        },
+                        include: [
+                        	{
+                        		model: db.masjid,
+                        		attributes: [],
+                        		required: true,
+                        		where: {
+                        			statusid: 1
+                        		}
+                        	}
+                        ]
                     }
                 ],
+                raw: true,
+  				nest: true
 			}).then(result => {
 				if (result) {
 					resolve(result);

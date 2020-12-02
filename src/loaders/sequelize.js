@@ -42,6 +42,10 @@ module.exports = () => {
 			foreignKey 	: 'masjid_uid'
 		});
 
+		masjid_map.belongsTo(masjid, {
+			foreignKey 	: 'masjid_uid'
+		});
+
 		jamaah_kk.hasMany(jamaah_kk_member, {
 			targetKey 	: 'kk_uid',
 			foreignKey 	: 'kk_uid'
