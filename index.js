@@ -2,7 +2,6 @@ const WebSocket     = require('ws');
 const express       = require('express');
 const fileUpload    = require('express-fileupload');
 const { Client }    = require('whatsapp-web.js');
-const qrcode        = require('qrcode-terminal');
 const loaders       = require('./src/loaders');
 
 const wss           = new WebSocket.Server({ noServer: true });
@@ -41,24 +40,32 @@ async function startServer() {
             const content       = JSON.parse(data);
 
             client.on('qr', (qr) => {
-                // Generate and scan this code with your phone
                 console.log('QR RECEIVED', qr);
                 ws.send(JSON.stringify({
-                    qr: qr
+                    action: 'qr',
+                    msg: qr
                 }));
-                qrcode.generate(qr, { small: true });
             });
              
             client.on('ready', () => {
                 console.log('Client is ready!');
+                ws.send(JSON.stringify({
+                    action: 'ready',
+                    msg: 'ready'
+                }));
                 if (content.message && content.phone) {
                     client.sendMessage(`${content.phone}@c.us`, content.message)
                     .then(() => {
                         ws.send(JSON.stringify({
-                            status: 'success'
+                            action: 'done',
+                            msg: 'success'
                         }));
                     })
                     .catch((error) => {
+                        ws.send(JSON.stringify({
+                            action: 'done',
+                            msg: 'error'
+                        }));
                         console.log(error);
                     });
                 }
