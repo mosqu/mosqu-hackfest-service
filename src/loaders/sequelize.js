@@ -21,6 +21,9 @@ module.exports = () => {
 		const masjid_image 		= model.masjid_image(db);
 		const masjid_map 		= model.masjid_map(db);
 		const masjid_program	= model.masjid_program(db);
+		const menu 				= model.menu(db);
+		const menu_group 		= model.menu_group(db);
+		const menu_map 			= model.menu_map(db);
 		const role 				= model.role(db);
 		const role_map 			= model.role_map(db);
 		const user 				= model.user(db);
@@ -63,9 +66,18 @@ module.exports = () => {
 			foreignKey 	: 'user_uid'
 		});
 
+		menu_map.belongsTo(menu_group, {
+	        foreignKey : `menu_group_uid`
+	    });
+
+	    menu.belongsTo(menu_group, {
+	        foreignKey : `menu_group_uid`
+	    });
+
 		db.authenticate()
 			.then(() => {
 				console.log('Database connection has been established successfully.');
+				global.sequelize = db;
 				resolve({
 					jamaah_kk,
 					jamaah_kk_member,
@@ -73,6 +85,9 @@ module.exports = () => {
 					masjid_image,
 					masjid_map,
 					masjid_program,
+					menu,
+					menu_group,
+					menu_map,
 					role,
 					role_map,
 					user

@@ -7,7 +7,11 @@ module.exports = {
 		res.json(result);
 	},
 
-	meta: (req, res) => {
-		res.json(req.userdata);
+	meta: async (req, res) => {
+		const result = await service.main.meta({
+			...req.userdata
+		});
+
+		res.json(result);
 	}
 }
