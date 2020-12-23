@@ -40,6 +40,18 @@ module.exports = (db) => {
             type      : Sequelize.JSONB,
             allowNull : true
         },
+        salary_id         : {
+            type      : Sequelize.UUID,
+            allowNull : true
+        },
+        family_status_id         : {
+            type      : Sequelize.UUID,
+            allowNull : true
+        },
+        phone_number         : {
+            type      : Sequelize.STRING,
+            allowNull : true
+        },
         statusid  : {
             type      : Sequelize.INTEGER,
             allowNull : true

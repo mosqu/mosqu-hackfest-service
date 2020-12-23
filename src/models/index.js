@@ -9,6 +9,7 @@ const menu_group 		= require('./menu_group');
 const menu_map 			= require('./menu_map');
 const role 				= require('./role');
 const role_map 			= require('./role_map');
+const status			= require('./status');
 const user 				= require('./user');
 
 module.exports = {
@@ -23,5 +24,6 @@ module.exports = {
 	menu_map,
 	role,
 	role_map,
+	status,
 	user
 };

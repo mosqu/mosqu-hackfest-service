@@ -26,6 +26,7 @@ module.exports = () => {
 		const menu_map 			= model.menu_map(db);
 		const role 				= model.role(db);
 		const role_map 			= model.role_map(db);
+		const status			= model.status(db);
 		const user 				= model.user(db);
 
 		masjid.hasMany(masjid_image, {
@@ -90,6 +91,7 @@ module.exports = () => {
 					menu_map,
 					role,
 					role_map,
+					status,
 					user
 				});
 			}).catch((error) => {

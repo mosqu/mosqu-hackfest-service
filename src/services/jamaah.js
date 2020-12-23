@@ -124,6 +124,48 @@ module.exports = {
         });
     },
 
+    getStatus: (data) => {
+        return new Promise(resolve => {
+            db.status.findAll({
+                attributes: [
+                    'status_uid', 'description', 'group'
+                ],
+                where : {
+                    statusid: 1
+                },
+                raw: true
+            }).then(result => {
+                const status = result.reduce((acc, val ) => {
+                    if (acc[val.group]) {
+                        acc[val.group].push({
+                            status_uid : val.status_uid,
+                            description: val.description
+                        });
+                    } else {
+                        acc[val.group] = [
+                            {
+                                status_uid : val.status_uid,
+                                description: val.description
+                            }
+                        ]
+                    }
+
+                    return acc;
+                }, {});
+                resolve({
+                    status: true,
+                    data: status
+                });
+            }).catch(error => {
+                console.log(error);
+                resolve({
+                    status : false,
+                    msg : error
+                });
+            });
+        });
+    },
+
     update: (data) => {
         return new Promise( async (resolve) => {
             const isOwner = await module.exports.checkOwner(data);

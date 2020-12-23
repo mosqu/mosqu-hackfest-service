@@ -20,6 +20,10 @@ route.get('/chart', [], (req, res) => {
 	controller.jamaah.getChart(req, res);
 });
 
+route.get('/status', [ auth.checkHeader ], (req, res) => {
+	controller.jamaah.getStatus(req, res);
+});
+
 route.post('/update/:kk_uid', [ auth.checkHeader ], (req, res) => {
 	controller.jamaah.update(req, res);
 });

@@ -37,6 +37,14 @@ module.exports = {
 		res.json(result);
 	},
 
+	getStatus: async (req, res) => {
+		const result = await service.jamaah.getStatus({
+			...req.params
+		});
+
+		res.json(result);
+	},
+
 	update: async (req, res) => {
 		const result = await service.jamaah.update({
 			...req.body,
