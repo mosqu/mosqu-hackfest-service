@@ -67,10 +67,40 @@ module.exports = {
                 attributes: [
                     'kk_uid', 'masjid_uid', 'name', 'age', 
                     'birthdate', 'occupation', 'salary', 'address',
-                    'latitude', 'longitude', 'additional_info'
+                    'latitude', 'longitude', 'additional_info', 'phone_number'
                 ],
                 where : {
-                    statusid: 1
+                    statusid: 1,
+                    masjid_uid: data.masjid.masjid_uid
+                },
+                limit : 20
+            }).then(result => {
+                resolve({
+                    status: true,
+                    data: result
+                });
+            }).catch(error => {
+                console.log(error);
+                resolve({
+                    status : false,
+                    msg : error
+                });
+            });
+        });
+    },
+
+    getAllPhone: (data) => {
+        return new Promise(resolve => {
+            db.jamaah_kk.findAll({
+                attributes: [
+                    'kk_uid', 'masjid_uid', 'name', 'phone_number'
+                ],
+                where : {
+                    statusid: 1,
+                    masjid_uid: data.masjid.masjid_uid,
+                    phone_number: {
+                        [Op.ne] : null
+                    }
                 },
                 limit : 20
             }).then(result => {
@@ -320,7 +350,8 @@ module.exports = {
         return new Promise( async (resolve) => {
             const result = await db.jamaah_kk.findAll({
                 where: {
-                    statusid: 1
+                    statusid: 1,
+                    masjid_uid: data.masjid.masjid_uid
                 },
                 include: [
                     {

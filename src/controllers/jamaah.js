@@ -13,7 +13,16 @@ module.exports = {
 
 	getAll: async (req, res) => {
 		const result = await service.jamaah.getAll({
-			...req.body,
+			...req.userdata,
+			...req.query
+		});
+
+		res.json(result);
+	},
+
+	getAllPhone: async (req, res) => {
+		const result = await service.jamaah.getAllPhone({
+			...req.userdata,
 			...req.query
 		});
 
@@ -31,7 +40,8 @@ module.exports = {
 
 	getChart: async (req, res) => {
 		const result = await service.jamaah.getChart({
-			...req.params
+			...req.params,
+			...req.userdata
 		});
 
 		res.json(result);

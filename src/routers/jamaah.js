@@ -8,15 +8,19 @@ route.post('/', [ auth.checkHeader ], (req, res) => {
 	controller.jamaah.new(req, res);
 });
 
-route.get('/list', [], (req, res) => {
+route.get('/list', [ auth.checkHeader ], (req, res) => {
 	controller.jamaah.getAll(req, res);
 });
 
-route.get('/detail/:kk_uid', [], (req, res) => {
+route.get('/list/phone', [ auth.checkHeader ], (req, res) => {
+	controller.jamaah.getAllPhone(req, res);
+});
+
+route.get('/detail/:kk_uid', [ auth.checkHeader ], (req, res) => {
 	controller.jamaah.getDetail(req, res);
 });
 
-route.get('/chart', [], (req, res) => {
+route.get('/chart', [ auth.checkHeader ], (req, res) => {
 	controller.jamaah.getChart(req, res);
 });
 
