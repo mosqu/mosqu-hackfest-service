@@ -441,6 +441,42 @@
         }
       }
     },
+    "/program/jamaah": {
+      "post": {
+        "tags": [
+          "program"
+        ],
+        "summary": "New program jamaah",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Register program jamaah masjid object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProgramJamaah"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "description": "Token from user login",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Token"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
     "/program/update/{masjid_program_uid}": {
       "post": {
         "tags": [
@@ -955,6 +991,39 @@
         "type": {
           "type": "string",
           "example": "eventual"
+        },
+        "additional_info": {
+          "type": "object",
+          "example": ""
+        }
+      }
+    },
+    "ProgramJamaah": {
+      "type": "object",
+      "properties": {
+        "masjid_program_uid": {
+          "type": "string",
+          "example": "2776e231-c90a-410a-b522-2a03f2dbd184"
+        },
+        "masjid_uid": {
+          "type": "string",
+          "example": "2776e231-c90a-410a-b522-2a03f2dbd184"
+        },
+        "name": {
+          "type": "string",
+          "example": "Budi"
+        },
+        "address": {
+          "type": "string",
+          "example": "Bandung"
+        },
+        "birthdate": {
+          "type": "string",
+          "example": "2 Oktober 1990"
+        },
+        "phone_number": {
+          "type": "string",
+          "example": "62812565272"
         },
         "additional_info": {
           "type": "object",

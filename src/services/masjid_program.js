@@ -114,6 +114,33 @@ module.exports = {
 			});
 		});
 	},
+	addProgramJamaah: (data) => {
+		return new Promise( async (resolve) => {
+			console.log(data);
+			const isOwner = await module.exports.checkOwner(data);
+			if (isOwner) {
+				db.program_jamaah.create({
+					...data,
+					createby: data.username
+				}).then((result) => {
+					resolve({
+						status: true,
+						data: result
+					});
+				}).catch(error => {
+					resolve({
+						status : false,
+						msg : error
+					});
+				});
+			} else {
+				resolve({
+					status : false,
+					msg : 'Unauthorized user'
+				});
+			}
+		});
+	},
 	update: (data) => {
 		return new Promise( async (resolve) => {
 			const isOwner = await module.exports.checkOwner(data);

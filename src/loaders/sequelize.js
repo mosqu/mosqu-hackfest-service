@@ -24,6 +24,7 @@ module.exports = () => {
 		const menu 				= model.menu(db);
 		const menu_group 		= model.menu_group(db);
 		const menu_map 			= model.menu_map(db);
+		const program_jamaah 	= model.program_jamaah(db);
 		const role 				= model.role(db);
 		const role_map 			= model.role_map(db);
 		const status			= model.status(db);
@@ -89,6 +90,7 @@ module.exports = () => {
 					menu,
 					menu_group,
 					menu_map,
+					program_jamaah,
 					role,
 					role_map,
 					status,

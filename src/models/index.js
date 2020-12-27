@@ -7,6 +7,7 @@ const masjid_program 	= require('./masjid_program');
 const menu 				= require('./menu');
 const menu_group 		= require('./menu_group');
 const menu_map 			= require('./menu_map');
+const program_jamaah	= require('./program_jamaah');
 const role 				= require('./role');
 const role_map 			= require('./role_map');
 const status			= require('./status');
@@ -22,6 +23,7 @@ module.exports = {
 	menu,
 	menu_group,
 	menu_map,
+	program_jamaah,
 	role,
 	role_map,
 	status,

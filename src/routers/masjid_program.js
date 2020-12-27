@@ -16,6 +16,10 @@ route.get('/detail/:masjid_program_uid', [], (req, res) => {
 	controller.masjid_program.getDetail(req, res);
 });
 
+route.post('/jamaah', [ auth.checkHeader ], (req, res) => {
+	controller.masjid_program.addProgramJamaah(req, res);
+});
+
 route.post('/update/:masjid_program_uid', [ auth.checkHeader ], (req, res) => {
 	controller.masjid_program.update(req, res);
 });

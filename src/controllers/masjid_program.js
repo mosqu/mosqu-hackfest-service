@@ -27,6 +27,14 @@ module.exports = {
 
 		res.json(result);
 	},
+	addProgramJamaah: async (req, res) => {
+		const result = await service.masjid_program.addProgramJamaah({
+			...req.body,
+			...req.userdata
+		});
+
+		res.json(result);
+	},
 	update: async (req, res) => {
 		const result = await service.masjid_program.update({
 			...req.body,
