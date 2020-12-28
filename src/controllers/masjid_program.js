@@ -19,6 +19,13 @@ module.exports = {
 
 		res.json(result);
 	},
+	getProgramJamaahList: async (req, res) => {
+		const result = await service.masjid_program.getProgramJamaahList({
+			...req.query
+		});
+
+		res.json(result);
+	},
 	getDetail: async (req, res) => {
 		const result = await service.masjid_program.getDetail({
 			...req.body,
@@ -34,6 +41,22 @@ module.exports = {
 		});
 
 		res.json(result);
+	},
+	uploadProgramJamaah: async (req, res) => {
+
+		if (!req.files || Object.keys(req.files).length === 0) {
+			res.send({
+				status : false,
+				msg : 'No files were uploaded.'
+			});
+		} else {
+			const result = await service.masjid_program.uploadProgramJamaah({
+				...req.files,
+				...req.body
+			});
+
+			res.json(result);
+		}
 	},
 	update: async (req, res) => {
 		const result = await service.masjid_program.update({

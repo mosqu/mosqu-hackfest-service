@@ -417,6 +417,30 @@
         }
       }
     },
+    "/program/jamaah/list": {
+      "get": {
+        "tags": [
+          "program"
+        ],
+        "summary": "Get list program jamaah",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "masjid_program_uid",
+            "required": false,
+            "type" : "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
     "/program/detail/{masjid_program_uid}": {
       "get": {
         "tags": [
