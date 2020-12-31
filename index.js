@@ -47,20 +47,42 @@ async function startServer() {
                     action: 'ready',
                     msg: 'ready'
                 });
-                if (content.message && content.phone) {
-                    client.sendMessage(`${content.phone}@c.us`, content.message)
-                    .then(() => {
+
+                if (content.message && content.phone.length) {
+                    Promise.all(content.phone.map((number) => {
+                        return new Promise((resolve) => {
+                            setTimeout(() => {
+                                console.log(number);
+                                client.sendMessage(`${number}@c.us`, content.message)
+                                .then(() => {
+                                    resolve({
+                                        number: number,
+                                        status: 'success'
+                                    });
+                                })
+                                .catch((error) => {
+                                    console.log(error);
+                                    resolve({
+                                        number: number,
+                                        status: 'error',
+                                        error: error
+                                    });
+                                });
+                            }, 1000);
+                        });
+                    })).then((result) => {
                         socket.emit('blast/response', {
                             action: 'done',
-                            msg: 'success'
+                            msg: 'success',
+                            result: result
                         });
                     })
                     .catch((error) => {
+                        console.log(error);
                         socket.emit('blast/response', {
                             action: 'done',
                             msg: 'error'
                         });
-                        console.log(error);
                     });
                 }
 
