@@ -81,17 +81,27 @@ module.exports = {
             });
         });
     },
+    getProgramJamaahListTotal: (data) => {
+        return new Promise((resolve) => {
+            db.program_jamaah.count().then((result) => {
+                resolve(result);
+            });
+        });
+    },
     getProgramJamaahList: (data) => {
-        return new Promise(resolve => {
+        return new Promise(async (resolve) => {
+            const count = await module.exports.getProgramJamaahListTotal();
             db.program_jamaah.findAll({
                 where: {
                     masjid_program_uid: data.masjid_program_uid
                 },
-                limit: 200
+                offset: (data.page-1)*data.itemsPerPage,
+                limit: data.itemsPerPage
             }).then(result => {
                 resolve({
                     status: true,
-                    data: result
+                    data: result,
+                    total: count
                 });
             }).catch(error => {
                 console.log(error);
