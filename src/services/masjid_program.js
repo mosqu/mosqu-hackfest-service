@@ -83,14 +83,18 @@ module.exports = {
     },
     getProgramJamaahListTotal: (data) => {
         return new Promise((resolve) => {
-            db.program_jamaah.count().then((result) => {
+            db.program_jamaah.count({
+                where: {
+                    masjid_program_uid: data.masjid_program_uid
+                },
+            }).then((result) => {
                 resolve(result);
             });
         });
     },
     getProgramJamaahList: (data) => {
         return new Promise(async (resolve) => {
-            const count = await module.exports.getProgramJamaahListTotal();
+            const count = await module.exports.getProgramJamaahListTotal(data);
             db.program_jamaah.findAll({
                 where: {
                     masjid_program_uid: data.masjid_program_uid
