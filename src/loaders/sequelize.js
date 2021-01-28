@@ -28,6 +28,7 @@ module.exports = () => {
 		const role 				= model.role(db);
 		const role_map 			= model.role_map(db);
 		const status			= model.status(db);
+		const trigger_whatsapp	= model.trigger_whatsapp(db);
 		const user 				= model.user(db);
 
 		masjid.hasMany(masjid_image, {
@@ -94,6 +95,7 @@ module.exports = () => {
 					role,
 					role_map,
 					status,
+					trigger_whatsapp,
 					user
 				});
 			}).catch((error) => {

@@ -67,5 +67,20 @@ module.exports = {
 
 			res.json(result);
 		}
+	},
+	getAllBotTrigger: async (req, res) => {
+		const result = await service.masjid.getAllBotTrigger({
+			...req.query
+		});
+
+		res.json(result);
+	},
+	newBotTrigger: async (req, res) => {
+		const result = await service.masjid.newBotTrigger({
+			...req.body,
+			...req.userdata
+		});
+
+		res.json(result);
 	}
 }

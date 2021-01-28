@@ -27,8 +27,6 @@ async function startServer() {
         console.log("Connected succesfully to the socket ...");        
 
         socket.on('blast', function (content) {
-            console.log(content);
-
             const client        = new Client({
                 puppeteer: { args: ['--no-sandbox'] }
             });
@@ -85,11 +83,23 @@ async function startServer() {
                         });
                     });
                 }
-
             });
 
             client.initialize().catch((error) => {
                 console.log(error);
+            });
+        });
+
+        socket.on('bot', function (content) {
+            const client = new Client({
+                puppeteer: { args: ['--no-sandbox'] }
+            });
+            client.on('qr', (qr) => {
+                console.log('QR RECEIVED', qr);
+                socket.emit('bot/response', {
+                    action: 'qr',
+                    data: qr
+                });
             });
 
         });

@@ -351,6 +351,75 @@
         }
       }
     },
+    "/masjid/bot/trigger": {
+      "post": {
+        "tags": [
+          "masjid"
+        ],
+        "summary": "New bot trigger",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Register bot trigger",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BotTrigger"
+            }
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "description": "Token from user login",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Token"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/masjid/bot/trigger/list": {
+      "get": {
+        "tags": [
+          "masjid"
+        ],
+        "summary": "Get list bot trigger",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "masjid_uid",
+            "required": false,
+            "type" : "string"
+          },
+          {
+            "in": "header",
+            "name": "authorization",
+            "description": "Token from user login",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Token"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
     "/program": {
       "post": {
         "tags": [
@@ -1161,6 +1230,23 @@
         "password": {
           "type": "string",
           "example": "12345"
+        }
+      }
+    },
+    "BotTrigger": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string",
+          "example": "arifintahu"
+        },
+        "content": {
+          "type": "string",
+          "example": "Hello internet"
+        },
+        "masjid_uid": {
+          "type": "string",
+          "example": "2776e231-c90a-410a-b522-2a03f2dbd184"
         }
       }
     }

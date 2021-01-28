@@ -28,4 +28,12 @@ route.post('/image/:masjid_uid', [ auth.checkHeader ], (req, res) => {
 	controller.masjid.uploadImage(req, res);
 });
 
+route.get('/bot/trigger/list', [ auth.checkHeader ], (req, res) => {
+	controller.masjid.getAllBotTrigger(req, res);
+});
+
+route.post('/bot/trigger', [ auth.checkHeader ], (req, res) => {
+	controller.masjid.newBotTrigger(req, res);
+});
+
 module.exports = route;

@@ -266,5 +266,71 @@ module.exports = {
                 resolve(false);
             });
         });
-    }
+    },
+    newBotTrigger: (data) => {
+        return new Promise(async (resolve) => {
+            const findTrigger = await module.exports.findBotTrigger({
+                key: data.key
+            });
+
+            if (findTrigger) {
+                resolve({
+                    status : false,
+                    msg : 'key is exist'
+                });
+            } else {
+                db.trigger_whatsapp.create({
+                    ...data,
+                    createby: data.username
+                }).then(async (result) => {
+                    resolve({
+                        status: true,
+                        data: result
+                    });
+                }).catch(error => {
+                    resolve({
+                        status : false,
+                        msg : error
+                    });
+                });
+            }
+        });
+    },
+    findBotTrigger: (data) => {
+        return new Promise(resolve => {
+            db.trigger_whatsapp.findOne({
+                where: {
+                    key: data.key,
+                    statusid: 1
+                }
+            }).then(async (result) => {
+                resolve(result);
+            }).catch(error => {
+                console.log(error);
+                resolve(null);
+            });
+        });
+    },
+    getAllBotTrigger: (data) => {
+        let query = {
+            statusid: 1
+        };
+
+        if (data.masjid_uid) {
+            query = {
+                ...query,
+                masjid_uid: data.masjid_uid
+            }
+        }
+        return new Promise(resolve => {
+            db.trigger_whatsapp.findAll({
+                where: query
+            }).then(async (result) => {
+                resolve(result);
+            }).catch(error => {
+                console.log(error);
+                resolve([]);
+            });
+        });
+    },
 }

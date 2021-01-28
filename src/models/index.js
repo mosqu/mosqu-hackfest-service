@@ -11,6 +11,7 @@ const program_jamaah	= require('./program_jamaah');
 const role 				= require('./role');
 const role_map 			= require('./role_map');
 const status			= require('./status');
+const trigger_whatsapp	= require('./trigger_whatsapp');
 const user 				= require('./user');
 
 module.exports = {
@@ -27,5 +28,6 @@ module.exports = {
 	role,
 	role_map,
 	status,
+	trigger_whatsapp,
 	user
 };
