@@ -2,6 +2,7 @@ const express       = require('express');
 const fileUpload    = require('express-fileupload');
 const { Client }    = require('whatsapp-web.js');
 const loaders       = require('./src/loaders');
+const masjid        = require('./src/services/masjid');
 
 async function startServer() {
     const app       = express();
@@ -24,7 +25,10 @@ async function startServer() {
     });
 
     io.on('connection', function (socket) {
-        console.log("Connected succesfully to the socket ...");        
+        console.log("Connected succesfully to the socket ...");
+        socket.emit('message', {
+            message: 'Connected succesfully to the socket ...'
+        });        
 
         socket.on('blast', function (content) {
             const client        = new Client({
@@ -90,18 +94,70 @@ async function startServer() {
             });
         });
 
-        socket.on('bot', function (content) {
+        socket.on('bot', (data) => {
             const client = new Client({
-                puppeteer: { args: ['--no-sandbox'] }
+                puppeteer: { 
+                    args: ['--no-sandbox'] 
+                }
             });
             client.on('qr', (qr) => {
-                console.log('QR RECEIVED', qr);
+                console.log('> QR code is received', qr);
                 socket.emit('bot/response', {
                     action: 'qr',
-                    data: qr
+                    data: qr,
+                    message: 'QR Code is generated'
                 });
             });
-
+            client.on('ready', () => {
+                console.log('> Client is ready!');
+                socket.emit('bot/response', {
+                    action: 'ready',
+                    data: null,
+                    message: 'Client is ready'
+                });
+            });
+            client.on('message', async (data) => {
+                if (data) {
+                    if (!data.fromMe) {
+                        const triggerContent = await masjid.findBotTrigger({
+                            key: data.body
+                        });
+                        if (triggerContent) {
+                            const message = triggerContent.content;
+                            client.sendMessage(data.from, message)
+                            .then(() => {
+                                console.log({
+                                    status: true,
+                                    from: data.from,
+                                    to: data.to,
+                                    body: data.body,
+                                    message: message
+                                });
+                            })
+                            .catch(() => {
+                                console.log({
+                                    status: false,
+                                    from: data.from,
+                                    to: data.to,
+                                    body: data.body,
+                                    message: error
+                                });
+                            });
+                        } else {
+                            console.log({
+                                status: false,
+                                from: data.from,
+                                to: data.to,
+                                body: data.body,
+                                message: 'trigger is not found'
+                            });
+                        }   
+                    }
+                }
+            });
+            client.initialize().catch((error) => {
+                console.log('> Error : ',error);
+            });
         });
     });
 }

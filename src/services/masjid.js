@@ -300,7 +300,7 @@ module.exports = {
         return new Promise(resolve => {
             db.trigger_whatsapp.findOne({
                 where: {
-                    key: data.key,
+                    key: data.key.toLowerCase(),
                     statusid: 1
                 }
             }).then(async (result) => {
