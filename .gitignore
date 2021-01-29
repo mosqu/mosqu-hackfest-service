@@ -3,3 +3,4 @@ node_modules
 protected/*.png
 protected/*.jpg
 protected/*.jpeg
+config
